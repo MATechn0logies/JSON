@@ -1,6 +1,7 @@
 from fastapi import FastAPI
 from Segments.BaseModel import PatientData
 from ADT.A04 import json_to_hl7_a04
+from ADT.A08 import json_to_hl7_a08
 from ACK.ACK import create_ack
 import requests
 import traceback
