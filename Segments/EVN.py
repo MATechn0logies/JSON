@@ -10,7 +10,6 @@ def json_to_hl7_EVN(data: dict) -> str:
         data.get("event_type")
         or data.get("trigger_event")
         or data.get("event")
-        or "A04"   # Default
     )
 
     # EVN-2: Recorded Date/Time

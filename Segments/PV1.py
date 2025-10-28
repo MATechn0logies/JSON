@@ -47,8 +47,9 @@ def json_to_hl7_PV1(data: dict) -> str:
     # PV1-44: Admit Date/Time
     pv1.PV1_44 = data.get("admit_datetime")
 
-    # PV1-45: Discharge Date/Time
-    if data.get("discharge_datetime"):
+    if data.get("message_type") == "A03":
+        if not data.get("discharge_datetime"):
+            raise ValueError("❌ Missing required PV1-45 (discharge_datetime) for ADT^A03 message")
         pv1.PV1_45 = data["discharge_datetime"]
 
     # PV1-50: Alternate Visit ID (optional)

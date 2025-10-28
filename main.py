@@ -1,7 +1,15 @@
 from fastapi import FastAPI
 from Segments.BaseModel import PatientData
+from ADT.A03 import json_to_hl7_a03
 from ADT.A04 import json_to_hl7_a04
 from ADT.A08 import json_to_hl7_a08
+from ADT.A11 import json_to_hl7_a11
+from ADT.A13 import json_to_hl7_a13
+from ADT.A28 import json_to_hl7_a28
+from ADT.A31 import json_to_hl7_a31
+from ADT.A39 import json_to_hl7_a39
+from ADT.A40 import json_to_hl7_a40
+
 from ACK.ACK import create_ack
 import requests
 import traceback
@@ -9,9 +17,18 @@ import traceback
 app = FastAPI()
 
 # Mapping of triggers to generator functions
-ADT_TRIGGER_MAPPING = {
+TRIGGER_MAPPING = {
+    "A03": json_to_hl7_a03,
     "A04": json_to_hl7_a04,
-    "A08": json_to_hl7_a08
+    "A08": json_to_hl7_a08,
+    "A11": json_to_hl7_a11,
+    "A13": json_to_hl7_a13,
+    "A28": json_to_hl7_a28,
+    "A31": json_to_hl7_a31,
+    "A39": json_to_hl7_a39,
+    "A40": json_to_hl7_a40,
+
+    
 }
 
 
