@@ -47,7 +47,7 @@ class DG1Segment(BaseModel):
 
 # ------------------- Main Patient Model -------------------
 class PatientData(BaseModel):
-    trigger_event: str  # Required (e.g., A04, A08, ORU)
+    trigger_event: str  
     message_datetime: str
     message_control_id: str
     source_app: str
@@ -73,7 +73,10 @@ class PatientData(BaseModel):
     attending_doctor: str
     referring_doctor: str
     admit_datetime: str
+    prior_patient_id: Optional[str] = None
+    prior_visit_number: Optional[str] = None
     discharge_datetime: Optional[str] = None
+    discharge_disposition: Optional[str] = None
 
     # Nested optional segment lists
     NK1: Optional[List[NK1Segment]] = None
