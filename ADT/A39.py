@@ -1,12 +1,6 @@
 from Segments.MSH import json_to_hl7_MSH
 from Segments.EVN import json_to_hl7_EVN
 from Segments.PID import json_to_hl7_PID
-from Segments.PD1 import json_to_hl7_PD1
-from Segments.NK1 import json_to_hl7_NK1
-from Segments.PV1 import json_to_hl7_PV1
-from Segments.OBX import json_to_hl7_OBX
-from Segments.AL1 import json_to_hl7_AL1
-from Segments.DG1 import json_to_hl7_DG1
 from Segments.MRG import json_to_hl7_MRG
 
 def json_to_hl7_a39(data: dict) -> str:
