@@ -43,7 +43,7 @@ async def send_hl7(patient: PatientData):
 
     # Step 2: Convert JSON -> HL7
     try:
-        hl7_generator = ADT_TRIGGER_MAPPING.get(trigger_event.upper())
+        hl7_generator = TRIGGER_MAPPING.get(trigger_event.upper())
         if not hl7_generator:
             return {"error": f"Unsupported trigger: {trigger_event}"}
 
