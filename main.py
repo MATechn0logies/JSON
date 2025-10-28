@@ -9,7 +9,8 @@ app = FastAPI()
 
 # Mapping of triggers to generator functions
 ADT_TRIGGER_MAPPING = {
-    "A04": json_to_hl7_a04
+    "A04": json_to_hl7_a04,
+    "A08": json_to_hl7_a08
 }
 
 
