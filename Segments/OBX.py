@@ -9,9 +9,9 @@ def json_to_hl7_OBX(data: dict) -> str:
     obx = Segment("OBX", version="2.5")
 
     # --- Required ---
-    obx.OBX_1 = data.get("set_id", "1")  # Sequence number
-    obx.OBX_2 = data.get("value_type", "NM")  # e.g., NM, ST, ED
-    obx.OBX_3 = data.get("observation_id", "8310-5^Body Temperature^^^^N")
+    obx.OBX_1 = data.get("set_id")  # Sequence number
+    obx.OBX_2 = data.get("value_type")  # e.g., NM, ST, ED
+    obx.OBX_3 = data.get("observation_id")
 
     # --- Optional fields (only set if value exists) ---
     if data.get("observation_sub_id"):

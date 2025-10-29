@@ -20,7 +20,8 @@ class OBXSegment(BaseModel):
     units: str
     observation_result_status: str
     date_time_of_observation: str
-
+    result_status: str
+    observation_datetime: str
 
 # ------------------- AL1 Segment -------------------
 class AL1Segment(BaseModel):
