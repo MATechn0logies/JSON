@@ -19,7 +19,6 @@ class OBXSegment(BaseModel):
     observation_value: str
     units: str
     observation_result_status: str
-    date_time_of_observation: str
     result_status: str
     observation_datetime: str
 
