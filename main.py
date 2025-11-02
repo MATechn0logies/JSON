@@ -1,5 +1,6 @@
 from fastapi import FastAPI
 from Segments.BaseModel import PatientData
+from Segments import BaseModel
 from ADT.A03 import json_to_hl7_a03
 from ADT.A04 import json_to_hl7_a04
 from ADT.A08 import json_to_hl7_a08
@@ -9,7 +10,15 @@ from ADT.A28 import json_to_hl7_a28
 from ADT.A31 import json_to_hl7_a31
 from ADT.A39 import json_to_hl7_a39
 from ADT.A40 import json_to_hl7_a40
+from ORU.R01 import json_to_hl7_oru
+from PPR.PRP import json_to_hl7_ppr_pc1
+from MDM.MDMT02 import json_to_hl7_MDM
+from ORM.O01 import json_to_hl7_ORM_O01
+from OMP.OMPO09 import json_to_hl7_OMP_O09
+from VXU.VXUV04 import json_to_hl7_vxu
 
+
+import Segments.BaseModel
 from ACK.ACK import create_ack
 import requests
 import traceback
@@ -27,6 +36,13 @@ TRIGGER_MAPPING = {
     "A31": json_to_hl7_a31,
     "A39": json_to_hl7_a39,
     "A40": json_to_hl7_a40,
+    "PPR" :json_to_hl7_ppr_pc1,
+    "R01" : json_to_hl7_oru,
+    "T02" : json_to_hl7_MDM,
+    "T08" : json_to_hl7_MDM,
+    "O01" : json_to_hl7_ORM_O01,
+    "O09" : json_to_hl7_OMP_O09,
+    "V04" : json_to_hl7_vxu,
 
     
 }

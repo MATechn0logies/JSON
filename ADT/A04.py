@@ -14,6 +14,7 @@ def json_to_hl7_a04(data: dict) -> str:
     evn = json_to_hl7_EVN(data)
     pid = json_to_hl7_PID(data)
     pv1 = json_to_hl7_PV1(data)
+    
 
     # ---- Optional Segments ----
     optional_segments = []

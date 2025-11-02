@@ -36,3 +36,16 @@ def json_to_hl7_NK1(data: Dict) -> str:
         nk1_segments.append(nk1.to_er7())
 
     return "\r".join(nk1_segments)
+def json_to_hl7_NK1_multiple(data_list: List[Dict]) -> str:
+    """ 
+    Generate multiple NK1 segments if multiple next of kin entries exist.
+    segments = []
+    for nk_data in data_list:
+        segments.append(json_to_hl7_NK1({"NK1": [nk_data]}))
+    return "\r".join(segments)
+    """
+    segments = []
+    for nk_data in data_list:
+        segments.append(json_to_hl7_NK1({"NK1": [nk_data]}))
+    return "\r".join(segments)      
+    

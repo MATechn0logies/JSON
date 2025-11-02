@@ -39,6 +39,12 @@ def json_to_hl7_MSH(data: dict) -> str:
                 event_type = f"ORU^{event_type}"
             elif event_type.startswith("V"):
                 event_type = f"VXU^{event_type}"
+            elif event_type.startswith("T"):
+                event_type = f"MDM^{event_type}"
+            elif event_type.startswith("O01"):
+                event_type = f"ORM^{event_type}"
+            elif event_type.startswith("O09"):
+                event_type = f"OMP^{event_type}"
             else:
                 event_type = f"HL7^{event_type}"
         msh.MSH_9 = event_type
