@@ -81,9 +81,12 @@ class DG1Segment(BaseModel):
     diagnosing_clinician: str
     diagnosis_action_code: str
 
+
 class NTESegment(BaseModel):
-    set_id: str
-    comment: str
+    set_id: str                     # NTE-1
+    comment: str                    # NTE-3
+    source_of_comment: Optional[str] = "L"  # NTE-2 default to Local (L)
+
 
 class TXASegment(BaseModel):
     set_id: str
@@ -165,6 +168,23 @@ class RXASegment(BaseModel):
     completion_status: str                      # RXA-20
     action_code: Optional[str] = ""             # RXA-21
     system_entry_datetime: str                  # RXA-22
+# ------------------- PRB Segment -------------------
+
+
+class PRBSegment(BaseModel):
+    set_id: Optional[str] = None                                # PRB-1
+    action_datetime: Optional[str] = None                       # PRB-2 (TS)
+    problem_id: Optional[str] = None                            # PRB-3 (CE format: Code^Text^System)
+    problem_instance_id: Optional[str] = None                   # PRB-4 (EI)
+    problem_established_date: Optional[str] = None              # PRB-7 (TS)
+    problem_resolution_date: Optional[str] = ""                 # PRB-9 (TS, optional)
+    classification: Optional[str] = None                        # PRB-10 (e.g., F^Final^LOCAL)
+    life_cycle_status: Optional[str] = None                     # PRB-14 (SNOMED code)
+    status_datetime: Optional[str] = None                       # PRB-15 (TS)
+    problem_onset_date: Optional[str] = None                    # PRB-16 (TS)
+
+    # Special NABIDH instruction — delete all problems
+    delete_all: Optional[bool] = False
 
 
 # ------------------- Patient Data Wrapper -------------------
@@ -219,4 +239,5 @@ class PatientData(BaseModel):
     IN1: Optional[IN1Segment] = None
     RXO: Optional[RXOSegment] = None
     RXA: Optional[RXASegment] = None
+    PRB: Optional[List[PRBSegment]] = None
 

@@ -36,13 +36,13 @@ TRIGGER_MAPPING = {
     "A31": json_to_hl7_a31,
     "A39": json_to_hl7_a39,
     "A40": json_to_hl7_a40,
-    "PPR" :json_to_hl7_ppr_pc1,
     "R01" : json_to_hl7_oru,
     "T02" : json_to_hl7_MDM,
     "T08" : json_to_hl7_MDM,
     "O01" : json_to_hl7_ORM_O01,
     "O09" : json_to_hl7_OMP_O09,
     "V04" : json_to_hl7_vxu,
+    "PC1": json_to_hl7_ppr_pc1,
 
     
 }
