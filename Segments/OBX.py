@@ -31,9 +31,7 @@ def json_to_hl7_OBX(data: dict) -> str:
         obx.OBX_11 = data["result_status"]
     if data.get("observation_datetime"):
         obx.OBX_14 = data["observation_datetime"]
-    if data.get("performing_org"):
-        Field_23 = obx.add_field("OBX_23")
-        Field_23.value = data["performing_org"]
+    
 
         
        
