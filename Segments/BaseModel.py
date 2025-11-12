@@ -63,29 +63,31 @@ class OBXSegment(BaseModel):
 
 class AL1Segment(BaseModel):
     set_id: str
-    allergen_type: str
-    allergen_code: str
-    allergy_severity: str
-    reaction: Optional[str]
-    identification_date: str
+    allergen_type_code: str               
+    allergen_code: str                    
+    allergy_severity_code: str            
+    allergy_reaction: str                 
+    identification_date: str             
+    delete_all: Optional[bool] = False    
+
 
 
 class DG1Segment(BaseModel):
     set_id: str
-    diagnosis_coding_method: str
+    diagnosis_coding_method: Optional[str] = "I10"
     diagnosis_code: str
     diagnosis_description: str
-    diagnosis_date_time: str
-    diagnosis_type: str
-    diagnosis_priority: str
-    diagnosing_clinician: str
-    diagnosis_action_code: str
+    diagnosis_datetime: str
+    diagnosis_type: Optional[str] = "F"
+    diagnosis_priority: Optional[str] = "1"
+    diagnosing_clinician: Optional[str] = None
+    diagnosis_action_code: Optional[str] = "A"
+
 
 
 class NTESegment(BaseModel):
     set_id: str                     # NTE-1
     comment: str                    # NTE-3
-    source_of_comment: Optional[str] = "L"  # NTE-2 default to Local (L)
 
 
 class TXASegment(BaseModel):
@@ -187,6 +189,15 @@ class PRBSegment(BaseModel):
     delete_all: Optional[bool] = False
 
 
+class SPMSegment(BaseModel):
+    set_id: str
+    specimen_id: Optional[str] = None
+    specimen_type: str
+    specimen_collection_method: Optional[str] = None
+    specimen_source_site: Optional[str] = None
+    specimen_collection_datetime: str
+    specimen_received_datetime: str
+
 # ------------------- Patient Data Wrapper -------------------
 class PatientData(BaseModel):
     trigger_event: str
@@ -229,15 +240,19 @@ class PatientData(BaseModel):
     OBX: Optional[List[OBXSegment]] = None
     AL1: Optional[List[AL1Segment]] = None
     DG1: Optional[List[DG1Segment]] = None
+    
   
 
     # ✅ ADD THESE FOR ORU
     ORC: Optional[ORCSegment] = None
     OBR: Optional[OBRSegment] = None
-    NTESegment:Optional[NTESegment]=None
     TXA: Optional[TXASegment] = None
     IN1: Optional[IN1Segment] = None
     RXO: Optional[RXOSegment] = None
     RXA: Optional[RXASegment] = None
     PRB: Optional[List[PRBSegment]] = None
+    DG1Segment: Optional[DG1Segment] = None
+    NTE: Optional[List[NTESegment]] = None    # ✅ Matches JSON key
+    SPM: Optional[List[SPMSegment]] = None
+    AL1Segment: Optional[AL1Segment] = None
 
