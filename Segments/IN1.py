@@ -20,4 +20,5 @@ def json_to_hl7_IN1(data: dict) -> str:
     IN1.IN1_19 = data.get("insured_address")
     IN1.In1_22 = data.get("coordination_of_benefits")
     IN1.IN1_36 = data.get("policy_number")
+    
     return IN1.to_er7()

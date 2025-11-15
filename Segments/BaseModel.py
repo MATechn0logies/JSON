@@ -198,6 +198,18 @@ class SPMSegment(BaseModel):
     specimen_collection_datetime: str
     specimen_received_datetime: str
 
+
+class PR1Segment(BaseModel):
+    set_id: str                                   # PR1-1 (sequence number)
+    procedure_code: str                           # PR1-3 CE e.g. 71020^X-RAY CHEST^C4
+    procedure_description: str                    # PR1-4 ST
+    procedure_datetime: str                       # PR1-5 TS
+    surgeon: Optional[str] = None                 # PR1-11 XCN
+    procedure_priority: Optional[str] = "1"       # PR1-14 ID (1 = Primary)
+    procedure_identifier: Optional[str] = None    # PR1-19 EI
+    procedure_action_code: Optional[str] = "A"    # PR1-20 ID (A=Add, D=Delete)
+
+
 # ------------------- Patient Data Wrapper -------------------
 class PatientData(BaseModel):
     trigger_event: str
@@ -240,6 +252,10 @@ class PatientData(BaseModel):
     OBX: Optional[List[OBXSegment]] = None
     AL1: Optional[List[AL1Segment]] = None
     DG1: Optional[List[DG1Segment]] = None
+    PR1: Optional[List[PR1Segment]] = None
+    IN1 : Optional[List[IN1Segment]]=None
+    RXA : Optional[List[RXASegment]]=None
+    
     
   
 
@@ -247,12 +263,10 @@ class PatientData(BaseModel):
     ORC: Optional[ORCSegment] = None
     OBR: Optional[OBRSegment] = None
     TXA: Optional[TXASegment] = None
-    IN1: Optional[IN1Segment] = None
     RXO: Optional[RXOSegment] = None
     RXA: Optional[RXASegment] = None
     PRB: Optional[List[PRBSegment]] = None
-    DG1Segment: Optional[DG1Segment] = None
-    NTE: Optional[List[NTESegment]] = None    # ✅ Matches JSON key
+    NTE: Optional[List[NTESegment]] = None    
     SPM: Optional[List[SPMSegment]] = None
-    AL1Segment: Optional[AL1Segment] = None
+    
 

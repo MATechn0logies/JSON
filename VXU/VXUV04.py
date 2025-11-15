@@ -31,4 +31,5 @@ def json_to_hl7_vxu(data: dict) -> str:
     if data.get("OBX"):
         for obx_item in data["OBX"]:
             VXU_segments.append(json_to_hl7_OBX(obx_item))
+            
     return "\r".join(VXU_segments)
