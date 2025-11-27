@@ -13,7 +13,7 @@ def json_to_hl7_ppr_pc1(data: dict) -> str:
     segments.append(json_to_hl7_PID(data))
 
     # OPTIONAL PV1
-    if data.get("patient_class"):
+    if data.get("PV1"):
         segments.append(json_to_hl7_PV1(data["PV1"]))
 
     # REQUIRED PRB (multiple allowed)
