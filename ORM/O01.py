@@ -4,6 +4,7 @@ from Segments.PV1 import json_to_hl7_PV1
 from Segments.IN1 import json_to_hl7_IN1
 from Segments.ORC import json_to_hl7_ORC
 from Segments.RXO import json_to_hl7_RXO
+from Segments.NTE import json_to_hl7_NTE
 
 def json_to_hl7_ORM_O01(data: dict) -> str:
 
@@ -31,5 +32,10 @@ def json_to_hl7_ORM_O01(data: dict) -> str:
         if "RXO" not in order:
             raise Exception("❌ Missing RXO inside an ORDERS block")
         segments.append(json_to_hl7_RXO(order["RXO"]))
+
+    if data.get("NTE"):
+        for nte_item in data["NTE"]:
+            nte_segment = json_to_hl7_NTE(nte_item)
+            segments.append(nte_segment)
 
     return "\r".join(segments)

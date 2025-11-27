@@ -2,39 +2,31 @@ from Segments.MSH import json_to_hl7_MSH
 from Segments.PID import json_to_hl7_PID
 from Segments.PV1 import json_to_hl7_PV1
 from Segments.PRB import json_to_hl7_PRB
-from Segments.NTE import json_to_hl7_NTE  
+from Segments.NTE import json_to_hl7_NTE
 
 def json_to_hl7_ppr_pc1(data: dict) -> str:
-    """
-    Build PPR^PC1 HL7 message (Problems Record)
-    PV1 optional
-    PRB required (can repeat)
-    NTE optional under each PRB
-    """
 
     segments = []
 
-    # MSH & PID required
+    # REQUIRED
     segments.append(json_to_hl7_MSH(data))
     segments.append(json_to_hl7_PID(data))
-    segments.append(json_to_hl7_PV1(data))
-     # Empty separator for PV1
 
+    # OPTIONAL PV1
+    if data.get("patient_class"):
+        segments.append(json_to_hl7_PV1(data["PV1"]))
 
+    # REQUIRED PRB (multiple allowed)
+    prb_list = data.get("PRB")
+    if not prb_list:
+        raise ValueError("PRB is required for PPR-PC1 Message")
 
-    # ---- PV1 optional ----
-    
+    for prb in prb_list:
+        segments.append(json_to_hl7_PRB(prb))
 
-    # ---- PRB required ----
-    if not data.get("PRB"):
-        raise ValueError("PRB segment required in PPR message")
-
-    for prb_item in data["PRB"]:
-        segments.append(json_to_hl7_PRB(prb_item))
-
-        # ---- NTE under each PRB ----
-        if prb_item.get("NTE"):
-            for nte_item in prb_item["NTE"]:
-                segments.append(json_to_hl7_NTE(nte_item))
+        # OPTIONAL NTE below PRB
+        if "NTE" in prb and prb["NTE"]:
+            for nte in prb["NTE"]:
+                segments.append(json_to_hl7_NTE(nte))
 
     return "\r".join(segments)

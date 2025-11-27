@@ -18,7 +18,7 @@ def json_to_hl7_a11(data: dict) -> str:
     # ---- Optional Segments ----
     optional_segments = []
 
-    # PD1: Patient Additional Demographic (optional)
+    
 
     hl7_message = "\r".join(
         segment for segment in [msh, evn, pid, pv1, *optional_segments] if segment

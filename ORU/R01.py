@@ -9,10 +9,7 @@ from Segments.SPM import json_to_hl7_SPM
 
 
 def json_to_hl7_oru(data: dict) -> str:
-    """
-    Builds ORU^R01 HL7 message (NABIDH order)
-    Segment order: MSH, PID, PV1, ORC, OBR, OBX, NTE, SPM
-    """
+ 
 
     segments = []
 
@@ -37,11 +34,10 @@ def json_to_hl7_oru(data: dict) -> str:
             segments.append(json_to_hl7_OBX(obx_item))
 
     # --- Optional NTE list ---
-    if "NTE" in data and isinstance(data["NTE"], list):
+    if data.get("NTE"):
         for nte_item in data["NTE"]:
-            nte_str = json_to_hl7_NTE(nte_item)
-            if nte_str:
-                segments.append(nte_str)
+            nte_segment = json_to_hl7_NTE(nte_item)
+            segments.append(nte_segment)
 
     # --- Optional SPM list ---
     if "SPM" in data and isinstance(data["SPM"], list):
